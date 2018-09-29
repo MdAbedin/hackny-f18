@@ -6,9 +6,11 @@ import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.nex3z.flowlayout.FlowLayout;
 
@@ -54,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                     refImageView.setImageBitmap(imageBitmap);
                     break;
                 case REQUEST_IMAGE_CAPTURE_FOR_LAPTOP:
-                    laptopImage = laptopImage;
+                    laptopImage = imageBitmap;
                     laptopImageView.setImageBitmap(imageBitmap);
                     break;
                 case REQUEST_IMAGE_CAPTURE_FOR_STICKER:
@@ -83,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void sendImages(View view) {
-
+        if (refImage != null && laptopImage != null && stickerImages.size() != 0) {
+            Toast.makeText(this, "Sending images", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Incomplete form", Toast.LENGTH_SHORT).show();
+        }
     }
 }
