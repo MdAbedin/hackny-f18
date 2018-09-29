@@ -1,13 +1,22 @@
-import cv2
-import numpy as np
-from matplotlib import pyplot as plt
+import cv2;
+import numpy as np;
+from PIL import Image
+ 
+# turn main parts of images into blobs
+def blobify(file_path, new_file_name):
+	im_in = cv2.imread(file_path, cv2.IMREAD_GRAYSCALE);
+	th, im_th = cv2.threshold(im_in, 120, 255, cv2.THRESH_BINARY_INV);
+	im_floodfill = im_th.copy()
+	 
+	# fill
+	h, w = im_th.shape[:2]
+	mask = np.zeros((h+2, w+2), np.uint8)
+	cv2.floodFill(im_floodfill, mask, (0,0), 255);
+	im_floodfill_inv = cv2.bitwise_not(im_floodfill)
+	im_out = im_th | im_floodfill_inv
+	 
 
-img = cv2.imread('CdhG75nWAAIDOBP.png',0)
-edges = cv2.Canny(img,100,200)
+	im2 = Image.fromarray(im_out)
+	im2 = im2.convert("RGB")
 
-plt.subplot(121),plt.imshow(img,cmap = 'gray')
-plt.title('Original Image'), plt.xticks([]), plt.yticks([])
-plt.subplot(122),plt.imshow(edges,cmap = 'gray')
-plt.title('Edge Image'), plt.xticks([]), plt.yticks([])
-
-plt.show()
+	im2.save(new_file_name)
