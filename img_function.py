@@ -1,6 +1,6 @@
 # import cv2;
 # import numpy as np;
-# from PIL import Image
+from PIL import Image
  
 import cv2
 import numpy as np
@@ -68,8 +68,40 @@ def blobify(file_path, new_file_name):
 	#     ax.scatter(df.loc[ind, 'wt'], df.loc[ind, 'mpg'], label=ind)
 	# ax.legend(bbox_to_anchor=(1.05, 1), loc=2)
 	# fig.tight_layout()
-	plt.savefig('test.png')
 	# plt.show()
+	#----------------------END MAKING THE EDGES LOOK NICER
+
+	#----------------------START FILLING IN
+	im_in = cv2.imread('/Users/emily/Desktop/hackny-f18/lol3.jpg', cv2.IMREAD_GRAYSCALE);
+	th, im_th = cv2.threshold(im_in, 120, 255, cv2.THRESH_BINARY_INV);
+	im_floodfill = im_th.copy()
+	 
+	# fill
+	h, w = im_th.shape[:2]
+	mask = np.zeros((h+2, w+2), np.uint8)
+	cv2.floodFill(im_floodfill, mask, (0,0), 255);
+	im_floodfill_inv = cv2.bitwise_not(im_floodfill)
+	im_out = im_th | im_floodfill_inv
+	 
+
+	im2 = Image.fromarray(im_out)
+	im2 = im2.convert("RGB")
+
+	im2.save(new_file_name)
+	# FINISH WITH A BIG BLOB
+
+	# SAVE THE BIG BLOB
+	plt.savefig('lol3.jpg')
+
+	# SOME LINKS SO YOU DON'T GET LOST
+	# https://www.pyimagesearch.com/2016/03/28/measuring-size-of-objects-in-an-image-with-opencv/ --> asdf.py
+	# https://www.learnopencv.com/filling-holes-in-an-image-using-opencv-python-c/ --> ASDF.PY
+
+	# DILATE MAKES LINES BIGGER
+	# ERODE MAKES THEM THINNER
+	# USE BOTH TO FILL IN GAPS BETWEEN LINES
+
+	# COMMAND TO RUN ASDF.PY...python3 asdf.py --image /Users/emily/Desktop/hackny-f18/lol3.jpg --width 0.955
 
 
 
