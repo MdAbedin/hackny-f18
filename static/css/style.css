@@ -1,0 +1,35 @@
+body {
+  font-family: 'Open Sans';
+  background-color: #55bbff;
+  color: white;
+}
+
+#content {
+  font-size: 40px;
+  margin: 20px;
+}
+
+#content h1 {
+  font-size: 100px;
+}
+
+.myBtn {
+  border: none;
+  background-color: #2277ff;
+  font-size: 50px;
+  padding: 15px 25px;
+  color: white;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.thumbnail {
+  width: 250px;
+}
+
+.single-image {
+  width: 400px;
+}
+
+img {
+  padding: 10px;
+}

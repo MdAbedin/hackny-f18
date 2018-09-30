@@ -1,14 +1,8 @@
 {% extends "base.html" %}
 
-
 {% block title %}
 <title>Explore Companies - StickerStorm</title>
 {% endblock %}
-
-
-{% block css %}
-{% endblock %}
-
 
 {% block content %}
 <form enctype=multipart/form-data action="/upload" method="post">
@@ -21,8 +15,4 @@
   <p>{{c}}</p>
   {% endfor %}
 </section>
-{% endblock %}
-
-
-{% block js %}
 {% endblock %}

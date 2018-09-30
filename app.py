@@ -8,6 +8,14 @@ photos = UploadSet('photos', IMAGES)
 app.config['UPLOADED_PHOTOS_DEST'] = 'static/img'
 configure_uploads(app, photos)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/stickers')
+def stickers():
+    return render_template('stickers.html')
+
 @app.route('/explore')
 def explore():
     return render_template('explore.html')

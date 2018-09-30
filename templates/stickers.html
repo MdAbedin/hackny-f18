@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Stickers - StickerStorm</title>
+{% endblock %}
+
+{% block content %}
+<center>
+  <div id="content" class="container">
+    <div class="row">
+      <h1>StickerStorm</h1>
+    </div>
+    <div class="row">
+      <h2>Laptop:</h2>
+      <img src="/static/img/laptop-back.png" width="400px" alt="Laptop" id="laptopImage"><br />
+      <button class="myBtn" onClick="$('#cameraInput').click()">Take New Image</button>
+      <input type="file" capture="camera" accept="image/*" id="cameraInput" style="display: none;">
+    </div>
+
+    <br />
+    <div class="row">
+      <h2>Stickers:</h2>
+      <div id="putStuffHere">
+        <img src="/static/img/sticker1.png" class="thumbnail" alt="">
+        <br />
+        <button class="myBtn" onClick="$('#cameraInput2').click()">&nbsp;+&nbsp;</button>
+        <input type="file" capture="camera" accept="image/*" id="cameraInput2" style="display: none;">
+      </div>
+    </div>
+
+    <br />
+    <div class="row">
+      <a href="/stickers" class="myBtn">Done</a>
+    </div>
+  </div>
+</center>
+{% endblock %}
+
+{% block js %}
+<script>
+$('#cameraInput').on('change', (e) => {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    $('#laptopImage').attr('src', e.target.result);
+  };
+  reader.readAsDataURL($('#cameraInput')[0].files[0]);
+});
+$('#cameraInput2').on('change', (e) => {
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    var newImg = $.clone($('.thumbnail')[0]);
+    newImg.setAttribute('src', e.target.result);
+    $('#putStuffHere').prepend(newImg);
+  };
+  reader.readAsDataURL($('#cameraInput2')[0].files[0]);
+});
+</script>
+{% endblock %}
