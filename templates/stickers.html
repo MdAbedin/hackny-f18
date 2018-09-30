@@ -21,7 +21,9 @@
     <div class="row">
       <h2>Stickers:</h2>
       <div id="putStuffHere">
-        <img src="/static/img/sticker1.png" class="thumbnail" alt="">
+        {% for i in stickers %}
+        <img src="/static/img/sticker{{i}}.png" class="thumbnail" alt="">
+        {% endfor %}
         <br />
         <button class="myBtn" onClick="$('#cameraInput2').click()">&nbsp;+&nbsp;</button>
         <input type="file" capture="camera" accept="image/*" id="cameraInput2" style="display: none;">
@@ -30,7 +32,7 @@
 
     <br />
     <div class="row">
-      <a href="/stickers" class="myBtn">Done</a>
+      <a href="/arranging" class="myBtn">Done</a>
     </div>
   </div>
 </center>

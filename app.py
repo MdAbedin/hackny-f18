@@ -14,7 +14,17 @@ def index():
 
 @app.route('/stickers')
 def stickers():
-    return render_template('stickers.html')
+    num_stickers = 7
+    return render_template('stickers.html', stickers=[i for i in range(num_stickers)], numStickers=num_stickers)
+
+@app.route('/arranging')
+def arranging():
+    num_stickers = 7
+    return render_template('arranging.html', stickers=[i for i in range(num_stickers)], numStickers=num_stickers)
+
+@app.route('/arranged')
+def arranged():
+    return render_template('arranged.html')
 
 @app.route('/explore')
 def explore():

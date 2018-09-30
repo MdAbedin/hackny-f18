@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Arranging... - StickerStorm</title>
+{% endblock %}
+
+{% block content %}
+<center>
+  <div id="content" class="container">
+    <div class="row">
+      <h1>StickerStorm</h1>
+    </div>
+    <div class="row">
+      <h2>Arranging stickers...</h2>
+    </div>
+    <canvas width="800px" height="500px" id="myCanvas"></canvas>
+  </div>
+  <img src="/static/img/laptop-back.png" style="display: none;" id="laptop-back">
+  {% for i in stickers %}
+  <img src="/static/img/sticker{{i}}.png" style="display: none;" id="sticker{{i}}">
+  {% endfor %}
+</center>
+{% endblock %}
+
+{% block js %}
+<script>
+var canvas, ctx, numStickers, laptopImage, stickerObjects;
+$(window).on('load', () => {
+  canvas = $('#myCanvas')[0];
+  ctx = canvas.getContext('2d');
+  numStickers = {{numStickers}};
+  stickerObjects = [];
+  laptopImage = $('#laptop-back')[0];
+  ctx.drawImage(laptopImage, 0, 0, 800, 500);
+  for (var i = 0; i < {{numStickers}}; i++) {
+    var obj = {};
+    obj.image = $("#sticker" + i)[0];
+    obj.x = Math.random() * 300;
+    obj.y = Math.random() * 200;
+    obj.dx = 7*(Math.random()*2 - 1);
+    obj.dy = 7*(Math.random()*2 - 1);
+    obj.width = obj.image.width;
+    obj.height = obj.image.height;
+    stickerObjects.push(obj);
+  }
+
+  setInterval(() => {
+    ctx.drawImage(laptopImage, 0, 0, 800, 500);
+
+    for (var i = 0; i < {{numStickers}}; i++) {
+      var sticker = stickerObjects[i];
+      ctx.drawImage(sticker.image, sticker.x, sticker.y, sticker.width, sticker.height);
+      sticker.x += sticker.dx;
+      if (sticker.x + sticker.width > 800 || sticker.x < 0) {
+        sticker.dx *= -1;
+      }
+      sticker.y += sticker.dy;
+      if (sticker.y + sticker.height > 500 || sticker.y < 0) {
+        sticker.dy *= -1;
+      }
+    }
+  }, 20);
+  setTimeout(() => window.location = '/arranged', 4000);
+});
+
+</script>
+{% endblock %}
+
