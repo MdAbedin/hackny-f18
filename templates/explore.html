@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+<title>Explore Companies - StickerStorm</title>
+{% endblock %}
+
+
+{% block css %}
+{% endblock %}
+
+
+{% block content %}
+<form enctype=multipart/form-data action="/upload" method="post">
+  <input name="photo" type="file" accept="image/*" capture="camera">
+  <input type="submit" value="Submit">
+</form>
+
+<section style="padding-top: 80px; padding-bottom: 40px;">
+  {% for c in companies %}
+  <p>{{c}}</p>
+  {% endfor %}
+</section>
+{% endblock %}
+
+
+{% block js %}
+{% endblock %}
