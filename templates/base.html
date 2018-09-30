@@ -9,23 +9,35 @@
     {% block css %}
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="/static/css/style.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
      <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     {% endblock %}
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
             
   </head>
 
   <body>
+    <ul id="slide-out" class="sidenav">
+      <li><a href="/"><span style="font-size: 50px;">Sticker Storm</span></a></li>
+      <li><div class="divider"></div></li>
+      <li><a href="/stickers">Sticker Arrangement</a></li>
+      <li><a href="/explore">Explore Stickers</a></li>
+    </ul>
+
     {% block content %}
     {% endblock %}
 
     {% block js %}
     {% endblock %}
+    <script>
+      $(document).ready(function() {
+        $('.sidenav').sidenav();
+      });
+    </script>
   </body>
 
 </html>
