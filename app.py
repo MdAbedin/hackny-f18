@@ -14,12 +14,12 @@ def index():
 
 @app.route('/stickers')
 def stickers():
-    num_stickers = 7
+    num_stickers = 8
     return render_template('stickers.html', stickers=[i for i in range(num_stickers)], numStickers=num_stickers)
 
 @app.route('/arranging')
 def arranging():
-    num_stickers = 7
+    num_stickers = 8
     return render_template('arranging.html', stickers=[i for i in range(num_stickers)], numStickers=num_stickers)
 
 @app.route('/arranged')
